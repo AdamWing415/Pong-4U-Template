@@ -102,7 +102,7 @@
             // 
             this.inputBox.Location = new System.Drawing.Point(2, 0);
             this.inputBox.Name = "inputBox";
-            this.inputBox.Size = new System.Drawing.Size(21, 22);
+            this.inputBox.Size = new System.Drawing.Size(10, 22);
             this.inputBox.TabIndex = 4;
             this.inputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.inputBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.inputBox_KeyUp);
@@ -110,9 +110,9 @@
             // coverLabel
             // 
             this.coverLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.coverLabel.Location = new System.Drawing.Point(-1, 0);
+            this.coverLabel.Location = new System.Drawing.Point(2, -11);
             this.coverLabel.Name = "coverLabel";
-            this.coverLabel.Size = new System.Drawing.Size(32, 31);
+            this.coverLabel.Size = new System.Drawing.Size(23, 41);
             this.coverLabel.TabIndex = 5;
             this.coverLabel.Text = "label1";
             // 
