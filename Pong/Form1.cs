@@ -28,7 +28,7 @@ namespace Pong
         #region global values
 
         //graphics objects for drawing
-        SolidBrush drawBrush = new SolidBrush(Color.White);
+        SolidBrush drawBrush = new SolidBrush(Color.Teal);
         Font drawFont = new Font("Courier New", 20);
 
         // Sounds for game
