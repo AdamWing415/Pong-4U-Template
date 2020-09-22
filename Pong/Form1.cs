@@ -29,6 +29,7 @@ namespace Pong
 
         //graphics objects for drawing
         SolidBrush drawBrush = new SolidBrush(Color.Teal);
+        SolidBrush invisBrush = new SolidBrush(Color.Black);
         Font drawFont = new Font("Courier New", 20);
 
         // Sounds for game
@@ -44,11 +45,11 @@ namespace Pong
         //ball directions, speed, and rectangle
         Boolean ballMoveRight = true;
         Boolean ballMoveDown = true;
-        const int BALL_SPEED = 5;
+        int BALL_SPEED = 4;
         Rectangle ball;
 
         //paddle speeds and rectangles
-        const int PADDLE_SPEED = 4;
+        const int PADDLE_SPEED = 5;
         Rectangle p1, p2, p3, p4;
         Rectangle MegaRightWall, MegaLeftWall;
         //player and game scores
@@ -57,10 +58,12 @@ namespace Pong
         int player3Score = 0;
         int player4Score = 0;
 
+        bool ghost = false;
 
         int gameWinScore = 3;  // number of points needed to win game
 
-       
+        int counter;
+
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             //check to see if a key is pressed and set is KeyDown value to true if it has
@@ -101,7 +104,50 @@ namespace Pong
             }
         }
 
-        private void inputBox_KeyUp(object sender, KeyEventArgs e)
+        private void modButton_Click(object sender, EventArgs e)
+        {
+            singlePlayerButton.Hide();
+            multiplayerButton.Hide();
+            megaplayerButton.Hide();
+            modButton.Hide();
+            quitButton.Hide();
+
+            startLabel.Text = "Choose your modifiers";
+
+            confirmButton.Show();
+            ghostButton.Show();
+        }
+
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            confirmButton.Hide();
+            ghostButton.Hide();
+
+            singlePlayerButton.Show();
+            multiplayerButton.Show();
+            megaplayerButton.Show();
+            modButton.Show();
+            quitButton.Show();
+
+            singlePlayerButton.Focus();
+            
+        }
+
+        private void ghostButton_Click(object sender, EventArgs e)
+        {
+            if (ghost == false)
+            {
+                ghost = true;
+                ghostButton.BackColor = Color.Gray;
+            }
+            else
+            {
+                ghost = false;
+                ghostButton.BackColor = Color.Black;
+            }
+        }
+
+        private void inputBox_KeyUp(object sender, KeyEventArgs e) // detects when a key is released
         {
             switch (e.KeyCode)
             {
@@ -139,20 +185,24 @@ namespace Pong
         public Form1()
         {
             InitializeComponent();
+            inputBox.Hide();
         }
-        private void singlePlayerButton_Click(object sender, EventArgs e)
+        private void singlePlayerButton_Click(object sender, EventArgs e) //selects singleplayer
         {
             gameMode = 1;
             SetParameters();
         }
-
-        private void multiplayerButton_Click(object sender, EventArgs e)
+        private void quitButton_Click(object sender, EventArgs e) //quits the game when pressed
+        {
+            Close();
+        }
+        private void multiplayerButton_Click(object sender, EventArgs e) //selects multiplayer
         {
             gameMode = 2;
             SetParameters();
         }
 
-        private void megaplayerButton_Click(object sender, EventArgs e)
+        private void megaplayerButton_Click(object sender, EventArgs e) // selects 4 player
         {
             gameMode = 4;
             SetParameters();
@@ -165,6 +215,8 @@ namespace Pong
         {
             if (newGameOk)
             {
+                startLabel.Text = "choose a mode";
+
                 Refresh();
                 if (gameMode == 4)
                 {
@@ -181,9 +233,17 @@ namespace Pong
                 megaplayerButton.Hide();
                 gameUpdateLoop.Start();
                 backingLabel.Hide();
+                quitButton.Hide();
+                modButton.Hide();
+                counter = 0;
+                BALL_SPEED = 4;
 
+                inputBox.Show();
                 inputBox.Focus();
             }
+
+            counter = 0;
+            BALL_SPEED = 4;
 
             //set starting position for paddles on new game and point scored 
             const int PADDLE_EDGE = 20;  // buffer distance between screen edge and paddle            
@@ -210,6 +270,8 @@ namespace Pong
             ball.X = this.Width / 2 - ball.Width / 2;
             ball.Y = this.Height / 2 - ball.Height / 2;
             // TODO set starting Y position for ball to middle of screen, (use this.Height and ball.Height)
+
+            // if 4 player is selected, use this setup as well
             if (gameMode == 4)
             {
                 MegaLeftWall.Width = MegaRightWall.Width = 5;
@@ -239,6 +301,7 @@ namespace Pong
         /// </summary>
         private void gameUpdateLoop_Tick(object sender, EventArgs e)
         {
+            //mutilplayer game setting
             if (gameMode == 2)
             {
                 #region update paddle positions
@@ -327,6 +390,7 @@ namespace Pong
                 #endregion
 
             }
+            //singleplayer game settings
             else if (gameMode == 1)
             {
                 #region update paddle positions
@@ -414,7 +478,13 @@ namespace Pong
 
                 #endregion
 
+                if (counter % 180 == 0)
+                {
+                    BALL_SPEED++;
+                }
+                counter++;
             }
+            //4 player game settings
             else if (gameMode == 4)
             {
                 #region update paddle positions
@@ -644,6 +714,9 @@ namespace Pong
             singlePlayerButton.Show();
             multiplayerButton.Show();
             megaplayerButton.Show();
+            quitButton.Show();
+            inputBox.Hide();
+            modButton.Show();
 
             singlePlayerButton.Focus();
 
@@ -657,14 +730,26 @@ namespace Pong
 
 
             // TODO draw ball using FillRectangle
-            e.Graphics.FillRectangle(drawBrush, ball);
 
+            if (ghost == true && ball.X < 80 || ghost == true && ball.X >= this.Width - 80 - ball.Width)
+            {
+                e.Graphics.FillRectangle(invisBrush, ball);
+            }
+            else if(ghost == true && ball.Y < 80 && gameMode == 4|| ghost == true && ball.Y >= this.Height - 80 - ball.Width  && gameMode == 4 || ghost == true && ball.X < MegaLeftWall.X + 5 || ghost == true && ball.X >= MegaRightWall.X - 80 - ball.Width)
+            {
+                e.Graphics.FillRectangle(invisBrush, ball);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(drawBrush, ball);
+            }
             // TODO draw scores to the screen using DrawString
 
 
             e.Graphics.DrawString(Convert.ToString("P1:" + player1Score), drawFont, drawBrush, this.Width / 2 - 70, this.Height / 2);
             e.Graphics.DrawString(Convert.ToString("P2:" + player2Score), drawFont, drawBrush, this.Width / 2, this.Height / 2);
 
+            //drawing objects for 4 player
             if (gameMode == 4)
             {
                 e.Graphics.FillRectangle(drawBrush, MegaLeftWall);

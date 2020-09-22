@@ -37,6 +37,10 @@
             this.inputBox = new System.Windows.Forms.TextBox();
             this.coverLabel = new System.Windows.Forms.Label();
             this.backingLabel = new System.Windows.Forms.Label();
+            this.quitButton = new System.Windows.Forms.Button();
+            this.modButton = new System.Windows.Forms.Button();
+            this.ghostButton = new System.Windows.Forms.Button();
+            this.confirmButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gameUpdateLoop
@@ -50,7 +54,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startLabel.ForeColor = System.Drawing.Color.White;
+            this.startLabel.ForeColor = System.Drawing.Color.Teal;
             this.startLabel.Location = new System.Drawing.Point(230, 124);
             this.startLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.startLabel.Name = "startLabel";
@@ -63,7 +67,7 @@
             // 
             this.singlePlayerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.singlePlayerButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singlePlayerButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.singlePlayerButton.ForeColor = System.Drawing.Color.Teal;
             this.singlePlayerButton.Location = new System.Drawing.Point(312, 257);
             this.singlePlayerButton.Name = "singlePlayerButton";
             this.singlePlayerButton.Size = new System.Drawing.Size(199, 43);
@@ -76,7 +80,7 @@
             // 
             this.multiplayerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.multiplayerButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.multiplayerButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.multiplayerButton.ForeColor = System.Drawing.Color.Teal;
             this.multiplayerButton.Location = new System.Drawing.Point(312, 306);
             this.multiplayerButton.Name = "multiplayerButton";
             this.multiplayerButton.Size = new System.Drawing.Size(199, 43);
@@ -89,7 +93,7 @@
             // 
             this.megaplayerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.megaplayerButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.megaplayerButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.megaplayerButton.ForeColor = System.Drawing.Color.Teal;
             this.megaplayerButton.Location = new System.Drawing.Point(312, 355);
             this.megaplayerButton.Name = "megaplayerButton";
             this.megaplayerButton.Size = new System.Drawing.Size(199, 43);
@@ -102,15 +106,17 @@
             // 
             this.inputBox.Location = new System.Drawing.Point(2, 0);
             this.inputBox.Name = "inputBox";
+            this.inputBox.ShortcutsEnabled = false;
             this.inputBox.Size = new System.Drawing.Size(10, 22);
-            this.inputBox.TabIndex = 4;
+            this.inputBox.TabIndex = 99;
+            this.inputBox.TabStop = false;
             this.inputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.inputBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.inputBox_KeyUp);
             // 
             // coverLabel
             // 
             this.coverLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.coverLabel.Location = new System.Drawing.Point(2, -11);
+            this.coverLabel.Location = new System.Drawing.Point(-1, -9);
             this.coverLabel.Name = "coverLabel";
             this.coverLabel.Size = new System.Drawing.Size(23, 41);
             this.coverLabel.TabIndex = 5;
@@ -119,11 +125,65 @@
             // backingLabel
             // 
             this.backingLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backingLabel.Location = new System.Drawing.Point(227, 160);
+            this.backingLabel.Location = new System.Drawing.Point(227, 145);
             this.backingLabel.Name = "backingLabel";
-            this.backingLabel.Size = new System.Drawing.Size(377, 280);
+            this.backingLabel.Size = new System.Drawing.Size(377, 318);
             this.backingLabel.TabIndex = 6;
             this.backingLabel.Text = "label1";
+            // 
+            // quitButton
+            // 
+            this.quitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quitButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitButton.ForeColor = System.Drawing.Color.Teal;
+            this.quitButton.Location = new System.Drawing.Point(312, 453);
+            this.quitButton.Name = "quitButton";
+            this.quitButton.Size = new System.Drawing.Size(199, 43);
+            this.quitButton.TabIndex = 4;
+            this.quitButton.Text = "Quit";
+            this.quitButton.UseVisualStyleBackColor = true;
+            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
+            // 
+            // modButton
+            // 
+            this.modButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.modButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modButton.ForeColor = System.Drawing.Color.Teal;
+            this.modButton.Location = new System.Drawing.Point(312, 404);
+            this.modButton.Name = "modButton";
+            this.modButton.Size = new System.Drawing.Size(199, 43);
+            this.modButton.TabIndex = 4;
+            this.modButton.Text = "Modifiers";
+            this.modButton.UseVisualStyleBackColor = true;
+            this.modButton.Click += new System.EventHandler(this.modButton_Click);
+            // 
+            // ghostButton
+            // 
+            this.ghostButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ghostButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ghostButton.ForeColor = System.Drawing.Color.Teal;
+            this.ghostButton.Location = new System.Drawing.Point(312, 257);
+            this.ghostButton.Name = "ghostButton";
+            this.ghostButton.Size = new System.Drawing.Size(199, 43);
+            this.ghostButton.TabIndex = 101;
+            this.ghostButton.Text = "Ghost";
+            this.ghostButton.UseVisualStyleBackColor = true;
+            this.ghostButton.Visible = false;
+            this.ghostButton.Click += new System.EventHandler(this.ghostButton_Click);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.confirmButton.Font = new System.Drawing.Font("Lucida Console", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmButton.ForeColor = System.Drawing.Color.Teal;
+            this.confirmButton.Location = new System.Drawing.Point(312, 453);
+            this.confirmButton.Name = "confirmButton";
+            this.confirmButton.Size = new System.Drawing.Size(199, 43);
+            this.confirmButton.TabIndex = 5;
+            this.confirmButton.Text = "Confirm";
+            this.confirmButton.UseVisualStyleBackColor = true;
+            this.confirmButton.Visible = false;
+            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
             // 
             // Form1
             // 
@@ -131,6 +191,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(821, 554);
+            this.Controls.Add(this.confirmButton);
+            this.Controls.Add(this.ghostButton);
+            this.Controls.Add(this.modButton);
+            this.Controls.Add(this.quitButton);
             this.Controls.Add(this.coverLabel);
             this.Controls.Add(this.inputBox);
             this.Controls.Add(this.megaplayerButton);
@@ -160,6 +224,10 @@
         private System.Windows.Forms.TextBox inputBox;
         private System.Windows.Forms.Label coverLabel;
         private System.Windows.Forms.Label backingLabel;
+        private System.Windows.Forms.Button quitButton;
+        private System.Windows.Forms.Button modButton;
+        private System.Windows.Forms.Button ghostButton;
+        private System.Windows.Forms.Button confirmButton;
     }
 }
 
